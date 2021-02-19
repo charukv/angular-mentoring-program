@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeletePopupComponent } from './delete-popup.component';
+import { BreadcrumbsComponent } from './breadcrumbs.component';
 
-describe('DeletePopupComponent', () => {
-  let component: DeletePopupComponent;
-  let fixture: ComponentFixture<DeletePopupComponent>;
+describe('BreadcrumbsComponent', () => {
+  let component: BreadcrumbsComponent;
+  let fixture: ComponentFixture<BreadcrumbsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeletePopupComponent ]
+      declarations: [ BreadcrumbsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeletePopupComponent);
+    fixture = TestBed.createComponent(BreadcrumbsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
