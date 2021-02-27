@@ -1,0 +1,27 @@
+.courses {
+    &-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    &-input {
+        padding: 10px 10px;
+        padding-right: 100px;
+        border: solid 1px #cfcfcf;
+        border-radius: 5px;
+        padding-left: 30px;
+    }
+    &-buttton {
+        background-color: #67A300;
+        color: #ffffff;
+        margin-left: 10px;
+    }
+    &-add {
+        display: flex;
+        justify-content: flex-end;
+        margin: 10px 0 10px 0;
+        &-button {
+            background-color: #009ECC;
+        }
+    }
+}

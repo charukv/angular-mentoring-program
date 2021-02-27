@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from "@angular/core";
 
 @Component({
-  selector: 'app-courses-page',
-  templateUrl: './courses-page.component.html',
-  styleUrls: ['./courses-page.component.scss']
+  selector: "app-courses-page",
+  templateUrl: "./courses-page.component.html",
+  styleUrls: ["./courses-page.component.scss"],
 })
 export class CoursesPageComponent implements OnInit {
 
-  constructor() { }
+  searchValue: string;
 
-  ngOnInit(): void {
+  constructor() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+  }
+
+  ngOnInit(): void {}
+
+  search() {
+      console.log(this.searchValue);
   }
 
 }

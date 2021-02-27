@@ -6,7 +6,7 @@ import { HeaderComponent } from "./header/header.component";
 import { FakeLogoComponent } from './fake-logo/fake-logo.component';
 
 @NgModule({
-    declarations: [HeaderComponent, FooterComponent, BreadcrumbsComponent, ActionPopupComponent, FakeLogoComponent],
+    declarations: [HeaderComponent, FooterComponent, BreadcrumbsComponent, ActionPopupComponent],
     exports: [HeaderComponent, FooterComponent, BreadcrumbsComponent, ActionPopupComponent]
 })
 

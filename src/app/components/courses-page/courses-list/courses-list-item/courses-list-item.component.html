@@ -1,1 +1,30 @@
-<p>courses-list-item works!</p>
+<div class="course-item">
+    <div class="course-item-section">
+        <h1 class="course-item-title">
+            {{coursesItem.Title}}
+        </h1>
+        <div class="course-item-date">
+            <div class="course-item-date-duration">
+                <span class="material-icons">access_time</span>
+                <span>{{coursesItem.Duration}}</span>
+            </div>
+            <div class="course-item-date-creation">
+                <span class="material-icons">calendar_today</span>
+                <span>{{coursesItem.CreationDate | date: 'LL/dd/y' }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="course-item-section">
+        <div class="course-item-description">
+            {{coursesItem.Description}}
+        </div>
+        <div class="course-item-actions">
+            <div>
+                <button mat-raised-button class="courses-buttton course-item-actions-button"><span
+            class="material-icons">mode_edit</span> Edit</button>
+                <button mat-raised-button class="courses-buttton course-item-actions-button" (click)="delete()"> <span
+            class="material-icons">delete</span>Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

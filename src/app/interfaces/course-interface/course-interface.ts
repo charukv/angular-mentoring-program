@@ -3,7 +3,7 @@ export interface CourseInterface {
     Title: string;
     CreationDate: Date;
     Duration: string;
-    DescriptionL: string;
+    Description: string;
 }
 
 export class Course implements CourseInterface {
@@ -11,5 +11,5 @@ export class Course implements CourseInterface {
     Title: string;
     CreationDate: Date;
     Duration: string;
-    DescriptionL: string;
+    Description: string;
 }
