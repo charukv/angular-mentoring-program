@@ -7,11 +7,12 @@ import { Router } from "@angular/router";
   styleUrls: ["./breadcrumbs.component.scss"],
 })
 export class BreadcrumbsComponent implements OnInit {
+
   url: string;
 
-  constructor(private route: Router) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.url = this.route.url;
+    this.url = this.router.url;
   }
 }

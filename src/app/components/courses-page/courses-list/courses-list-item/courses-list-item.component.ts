@@ -9,7 +9,7 @@ import { Course } from "src/app/interfaces/course-interface/course-interface";
 })
 export class CoursesListItemComponent implements OnInit {
 
-  coursesItem: Course;
+  coursesItem: Course = new Course();
 
   @Input() set CoursesItem(item) {
     this.coursesItem = item;
@@ -25,8 +25,8 @@ export class CoursesListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  delete() {
-    this.deleteCourse.emit(this.coursesItem.Id);
+  delete(id) {
+    this.deleteCourse.emit(id);
   }
 
 }

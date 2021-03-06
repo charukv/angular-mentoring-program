@@ -22,4 +22,11 @@ describe('CoursesPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should console log search value', () => {
+    const consoleSpy = spyOn(console, 'log');
+    component.search();
+
+    expect(consoleSpy).toHaveBeenCalled();
+  });
 });

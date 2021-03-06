@@ -22,4 +22,22 @@ describe('CoursesListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should console log load more', () => {
+    const consoleSpy = spyOn(console, 'log');
+    component.loadMore();
+
+    expect(consoleSpy).toHaveBeenCalled();
+  });
+
+  it('should console log delete event', () => {
+    const consoleSpy = spyOn(console, 'log');
+    component.deleteCourseTrigger({});
+
+    expect(consoleSpy).toHaveBeenCalled();
+  });
+
+  it('should contain data in coursesList variable', () => {
+    expect(component.coursesList.length).toBeGreaterThan(0);
+  });
 });
