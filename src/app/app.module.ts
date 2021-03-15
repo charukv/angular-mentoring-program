@@ -14,6 +14,10 @@ import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { FormsModule } from '@angular/forms';
 import { CoursesEditCreatePageComponent } from './components/courses-page/courses-edit-create-page/courses-edit-create-page.component';
+import { CoursePlateDirective } from "./directives/course-plate/course-plate.directive";
+import { DurationPipe } from './pipes/duration-pipe/duration.pipe';
+import { OrderByPipe } from './pipes/order-by-pipe/order-by.pipe';
+import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { CoursesEditCreatePageComponent } from './components/courses-page/course
     CoursesPageComponent,
     CoursesListComponent,
     CoursesListItemComponent,
-    CoursesEditCreatePageComponent
+    CoursesEditCreatePageComponent,
+    CoursePlateDirective,
+    DurationPipe,
+    OrderByPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,7 @@ import { CoursesEditCreatePageComponent } from './components/courses-page/course
     MatButtonModule,
     FormsModule
   ],
-  providers: [],
+  providers: [OrderByPipe, FilterPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

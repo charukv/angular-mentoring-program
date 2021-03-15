@@ -1,4 +1,6 @@
-import { Component, OnInit, SimpleChanges } from "@angular/core";
+import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
+import { SortDirection } from "src/app/pipes/order-by-pipe/order-by.pipe";
+import { Course } from '../../../interfaces/course-interface/course-interface';
 
 @Component({
   selector: "app-courses-list",
@@ -6,7 +8,11 @@ import { Component, OnInit, SimpleChanges } from "@angular/core";
   styleUrls: ["./courses-list.component.scss"],
 })
 export class CoursesListComponent implements OnInit {
-  coursesList: any[];
+  coursesList: Course[];
+  noData: boolean = false;
+  sortDirection = SortDirection.Desc;
+
+  @Input() searchValue: string;
 
   constructor() {}
 
@@ -18,9 +24,10 @@ export class CoursesListComponent implements OnInit {
     this.coursesList = [
       {
         Id: 1,
-        Title: "Video Course 1. Name tag",
+        Title: "Video Course 1.",
+        Name: "Name tag",
         CreationDate: new Date(),
-        Duration: "1h 28 min",
+        Duration: 28,
         Description: `Lorem ipsum dolor sit amet, 
         consectetur adipiscing elit, sed do eiusmod tempor 
         incididunt ut labore et dolore magna aliqua. Ut enim 
@@ -29,12 +36,14 @@ export class CoursesListComponent implements OnInit {
         in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
         nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
         sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+        topRated: true,
       },
       {
         Id: 2,
-        Title: "Video Course 2. Name tag",
-        CreationDate: new Date(),
-        Duration: "1h 28 min",
+        Title: "Video Course 2.",
+        Name: "Name tag",
+        CreationDate: new Date("10/10/2030"),
+        Duration: 97,
         Description: `Lorem ipsum dolor sit amet, 
         consectetur adipiscing elit, sed do eiusmod tempor 
         incididunt ut labore et dolore magna aliqua. Ut enim 
@@ -43,12 +52,14 @@ export class CoursesListComponent implements OnInit {
         in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
         nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
         sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+        topRated: false,
       },
       {
         Id: 3,
-        Title: "Video Course 3. Name tag",
-        CreationDate: new Date(),
-        Duration: "1h 28 min",
+        Title: "Video Course 3.",
+        Name: "Name tag",
+        CreationDate: new Date("02/28/2021"),
+        Duration: 135,
         Description: `Lorem ipsum dolor sit amet, 
         consectetur adipiscing elit, sed do eiusmod tempor 
         incididunt ut labore et dolore magna aliqua. Ut enim 
@@ -57,12 +68,15 @@ export class CoursesListComponent implements OnInit {
         in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
         nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
         sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-      }
+        topRated: true,
+      },
     ];
+
+    this.coursesList.length > 0 ? (this.noData = false) : (this.noData = true);
   }
 
   loadMore() {
-    console.log('Load more clicked');
+    console.log("Load more clicked");
   }
 
   deleteCourseTrigger(event) {

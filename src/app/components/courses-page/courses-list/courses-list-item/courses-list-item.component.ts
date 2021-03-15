@@ -10,9 +10,19 @@ import { Course } from "src/app/interfaces/course-interface/course-interface";
 export class CoursesListItemComponent implements OnInit {
 
   coursesItem: Course = new Course();
+  borderColor: string;
+  currentDate: number = new Date().getTime();
+  currentDate2: number = new Date().getTime();
+  fourteenDays: number = 12096e5;
 
   @Input() set CoursesItem(item) {
+    let creationDateTime = item.CreationDate.getTime();
     this.coursesItem = item;
+    if (creationDateTime < this.currentDate && creationDateTime >= this.currentDate - this.fourteenDays) {
+      this.borderColor = 'green';
+    } else if (creationDateTime > this.currentDate) {
+      this.borderColor = 'blue';
+    }
   }
   @Output() deleteCourse = new EventEmitter();
 

@@ -6,8 +6,8 @@ import { Component, OnInit, SimpleChanges } from "@angular/core";
   styleUrls: ["./courses-page.component.scss"],
 })
 export class CoursesPageComponent implements OnInit {
-
   searchValue: string;
+  searchValueSubmitted: string;
 
   constructor() {}
 
@@ -18,7 +18,6 @@ export class CoursesPageComponent implements OnInit {
   ngOnInit(): void {}
 
   search() {
-      console.log(this.searchValue);
+    this.searchValueSubmitted = this.searchValue;
   }
-
 }

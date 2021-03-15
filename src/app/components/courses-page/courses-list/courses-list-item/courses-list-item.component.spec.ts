@@ -1,4 +1,3 @@
-import { DebugElement } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 
@@ -9,10 +8,12 @@ describe("CoursesListItemComponent", () => {
   let fixture: ComponentFixture<CoursesListItemComponent>;
   const courseItem = {
     Id: 1,
-    Title: "Video Course 1. Name tag",
-    CreationDate: new Date(),
-    Duration: "1h 28 min",
-    Description: `Lorem ipsum`,
+        Title: "Video Course 1.",
+        Name: "Name tag",
+        CreationDate: new Date(),
+        Duration: 28,
+        Description: `Lorem ipsum`,
+        topRated: true,
   };
 
   beforeEach(async(() => {

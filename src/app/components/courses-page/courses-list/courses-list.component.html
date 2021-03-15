@@ -1,8 +1,16 @@
-<div class="courses-list">
-    <div class="courses-list-item" *ngFor="let coursesItem of coursesList">
-        <app-courses-list-item [CoursesItem]="coursesItem" (deleteCourse)="deleteCourseTrigger($event)"></app-courses-list-item>
+<div class="courses-list" *ngIf="!noData">
+    <!-- <div class="courses-list-item" *ngFor="let coursesItem of coursesList | orderBy:sortDirection"> -->
+    <div class="courses-list-item" *ngFor="let coursesItem of coursesList | filter:searchValue">
+        <app-courses-list-item [CoursesItem]="coursesItem" (deleteCourse)="deleteCourseTrigger($event)">
+        </app-courses-list-item>
     </div>
     <div class="courses-load-more">
         <div (click)="loadMore()">Load more</div>
+    </div>
+</div>
+
+<div class="courses-list" *ngIf="noData">
+    <div class="courses-no-data">
+        <div>NO DATA, FEEL FREE TO ADD NEW COURSE</div>
     </div>
 </div>
