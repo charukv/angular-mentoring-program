@@ -14,6 +14,8 @@ export class CoursesListItemComponent implements OnInit {
   currentDate: number = new Date().getTime();
   currentDate2: number = new Date().getTime();
   fourteenDays: number = 12096e5;
+  popupText: string = 'Do you really want to delete this course?';
+  popupVisibility: boolean = false;
 
   @Input() set CoursesItem(item) {
     let creationDateTime = item.CreationDate.getTime();
@@ -35,8 +37,13 @@ export class CoursesListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  delete(id) {
-    this.deleteCourse.emit(id);
+  delete(action) {
+    if (action) {
+      this.deleteCourse.emit(this.coursesItem.Id);
+    }
   }
 
+  deletePopup() {
+    this.popupVisibility = true;
+  }
 }

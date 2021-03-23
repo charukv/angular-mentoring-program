@@ -2,6 +2,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { SharedModule } from "./common/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from "@angular/common";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -40,7 +42,9 @@ import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    CommonModule
   ],
   providers: [OrderByPipe, FilterPipe],
   bootstrap: [AppComponent],

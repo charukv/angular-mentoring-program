@@ -1,1 +1,9 @@
-<p>action-popup works!</p>
+<div *ngIf="popupVisibility" class="action-popup">
+    <div class="action-popup-text">
+        {{ popupText }}
+    </div>
+    <div class="action-popup-actions">
+        <button mat-raised-button class="action-popup-button" (click)="confirm()">{{ confirmButton }}</button>
+        <button mat-raised-button class="action-popup-button" (click)="close()">{{ cancelButton }}</button>
+    </div>
+</div>
