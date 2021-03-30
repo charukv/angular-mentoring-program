@@ -6,6 +6,7 @@ export interface CourseInterface {
     Description: string;
     topRated: boolean;
     Name: string;
+    Author: string;
 }
 
 export class Course implements CourseInterface {
@@ -16,4 +17,5 @@ export class Course implements CourseInterface {
     Description: string;
     topRated: boolean;
     Name: string;
+    Author: string;
 }

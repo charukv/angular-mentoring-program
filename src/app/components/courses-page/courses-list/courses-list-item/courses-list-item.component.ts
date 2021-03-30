@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Course } from "src/app/interfaces/course-interface/course-interface";
 
 @Component({
   selector: 'app-courses-list-item',
   templateUrl: './courses-list-item.component.html',
-  styleUrls: ['./courses-list-item.component.scss']
+  styleUrls: ['./courses-list-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoursesListItemComponent implements OnInit {
 

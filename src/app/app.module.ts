@@ -4,6 +4,7 @@ import { SharedModule } from "./common/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -44,9 +45,10 @@ import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
     MatButtonModule,
     FormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    TextFieldModule
   ],
   providers: [OrderByPipe, FilterPipe],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

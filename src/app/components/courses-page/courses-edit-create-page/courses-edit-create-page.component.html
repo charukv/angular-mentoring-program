@@ -1,1 +1,37 @@
-<p>courses-edit-create-page works!</p>
+<div class="course">
+  <div class="course-container">
+    <h2>{{ _course.Id ? 'Create' : 'Update' }} Course</h2>
+    <form class="course-form">
+      <mat-form-field class="course-input" appearance="outline">
+        <mat-label>Title:</mat-label>
+        <input matInput name="title" [(ngModel)]="_course.Title" placeholder="Enter title">
+      </mat-form-field>
+      <mat-form-field class="course-input" appearance="outline">
+        <mat-label>Description:</mat-label>
+        <textarea matInput name="description" [(ngModel)]="_course.Description" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="10" cdkAutosizeMaxRows="20" placeholder="Enter description"></textarea>
+      </mat-form-field>
+      <div class="course-duration">
+        <mat-form-field class="course-input-duration" appearance="outline">
+          <mat-label>Duration:</mat-label>
+          <input matInput type="number" name="duration" [(ngModel)]="_course.Duration" placeholder="Enter duration">
+        </mat-form-field>
+        <div class="course-duration-time">
+          {{ _course.Duration ? (_course.Duration | duration) :  null }}
+        </div>
+      </div>
+      <mat-form-field class="course-input-date" appearance="outline">
+        <mat-label>Date:</mat-label>
+        <input matInput name="date" [(ngModel)]="_course.CreationDate" placeholder="Enter date">
+      </mat-form-field>
+      <mat-form-field class="course-input-author" appearance="outline">
+        <mat-label>Author:</mat-label>
+        <input matInput name="author" [(ngModel)]="_course.Author" placeholder="Enter author">
+      </mat-form-field>
+      <div class="course-submit">
+        <button mat-raised-button class="course-button" [disabled]="true" (click)="cancel()">Cancel</button>
+        <button mat-raised-button class="course-button" (click)="onSubmit()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

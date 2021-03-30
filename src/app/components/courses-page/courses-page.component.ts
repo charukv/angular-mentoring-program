@@ -1,4 +1,5 @@
 import { Component, OnInit, SimpleChanges } from "@angular/core";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-courses-page",

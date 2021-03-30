@@ -6,7 +6,7 @@
         <button mat-raised-button class="courses-buttton" (click)="search()">Search</button>
     </div>
     <div class="courses-add">
-        <button mat-raised-button class="courses-buttton courses-add-button"><span class="material-icons">add</span>Add
+        <button mat-raised-button class="courses-buttton courses-add-button" [routerLink]="'new'"><span class="material-icons">add</span>Add
       course</button>
     </div>
     <app-courses-list [searchValue]="searchValueSubmitted"></app-courses-list>
