@@ -1,8 +1,14 @@
 .breadcrumbs {
-    background-color: #ffffff;
-    height: 60px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    &-path {}
+  background-color: #ffffff;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &-path {}
+}
+
+.courses-link {
+  text-decoration: none;
+  color: #000000;
 }
