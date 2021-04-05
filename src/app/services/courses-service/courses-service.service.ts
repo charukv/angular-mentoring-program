@@ -77,6 +77,6 @@ export class CoursesServiceService {
   }
 
   removeCourse(course) {
-    return this.http.delete('courses/delete', course);
+    // return this.http.delete('courses/delete', course);
   }
 }

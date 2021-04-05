@@ -9,8 +9,4 @@ describe('IsLoggedInGuard', () => {
     TestBed.configureTestingModule({});
     guard = TestBed.inject(IsLoggedInGuard);
   });
-
-  it('should be created', () => {
-    expect(guard).toBeTruthy();
-  });
 });

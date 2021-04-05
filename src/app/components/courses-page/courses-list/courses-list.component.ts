@@ -39,5 +39,7 @@ export class CoursesListComponent implements OnInit {
 
   deleteCourseTrigger(id) {
     this.coursesList = this.coursesList.filter(course => course.Id !== id);
+    console.log(`Course ${id} successfully deleted`);
+    
   }
 }

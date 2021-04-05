@@ -20,5 +20,6 @@ export class CoursesPageComponent implements OnInit {
 
   search() {
     this.searchValueSubmitted = this.searchValue;
+    console.log(this.searchValue);
   }
 }

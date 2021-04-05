@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from 'src/app/app.module';
 
 import { CoursesEditCreatePageComponent } from './courses-edit-create-page.component';
 
@@ -8,6 +9,7 @@ describe('CoursesEditCreatePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [AppModule],
       declarations: [ CoursesEditCreatePageComponent ]
     })
     .compileComponents();
