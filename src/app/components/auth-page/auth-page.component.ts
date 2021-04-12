@@ -8,17 +8,24 @@ import { AuthServiceService } from "../../services/auth-service/auth-service.ser
   styleUrls: ["./auth-page.component.scss"],
 })
 export class AuthPageComponent implements OnInit {
+
+  login: string;
+  password: string;
+
   constructor(
     private _authServiceService: AuthServiceService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    this._authServiceService.login();
-    console.log('logged in successfully');
-    this.router.navigate(['/courses'])
+    this._authServiceService.login({ login: this.login, password: this.password })
+      .subscribe((response) => {
+        localStorage.setItem("token", JSON.stringify(response));
+        console.log('logged in successfully');
+        this.router.navigate(['/courses'])
+      });
   }
 }

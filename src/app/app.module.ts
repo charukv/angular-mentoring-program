@@ -21,6 +21,8 @@ import { CoursePlateDirective } from "./directives/course-plate/course-plate.dir
 import { DurationPipe } from './pipes/duration-pipe/duration.pipe';
 import { OrderByPipe } from './pipes/order-by-pipe/order-by.pipe';
 import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -48,7 +50,11 @@ import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
     CommonModule,
     TextFieldModule
   ],
-  providers: [OrderByPipe, FilterPipe],
+  providers: [OrderByPipe, FilterPipe, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

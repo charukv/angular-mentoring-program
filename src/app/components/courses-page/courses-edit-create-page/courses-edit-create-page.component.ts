@@ -44,7 +44,7 @@ export class CoursesEditCreatePageComponent implements OnInit {
    }
 
   onSubmit(course) {
-    if (course.Id) {
+    if (course.id) {
       this.updateCourse(course);
     } else {
       this.createCourse(course);

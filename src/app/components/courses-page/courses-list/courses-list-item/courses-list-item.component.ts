@@ -19,7 +19,8 @@ export class CoursesListItemComponent implements OnInit {
   popupVisibility: boolean = false;
 
   @Input() set CoursesItem(item) {
-    let creationDateTime = item.CreationDate.getTime();
+    item.date = new Date(item.date);
+    let creationDateTime = item.date.getTime();
     this.coursesItem = item;
     if (creationDateTime < this.currentDate && creationDateTime >= this.currentDate - this.fourteenDays) {
       this.borderColor = 'green';
@@ -40,7 +41,7 @@ export class CoursesListItemComponent implements OnInit {
 
   delete(action) {
     if (action) {
-      this.deleteCourse.emit(this.coursesItem.Id);
+      this.deleteCourse.emit(this.coursesItem.id);
     }
   }
 

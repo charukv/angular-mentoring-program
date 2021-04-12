@@ -5,13 +5,12 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class AuthServiceService {
-  constructor(private http: HttpClient) {}
+  serverUrl = 'http://localhost:3004';
 
-  login() {
-    localStorage.setItem(
-      "token",
-      JSON.stringify({ token: new Date().getTime(), user: "charukv" })
-    );
+  constructor(private http: HttpClient) { }
+
+  login(user) {
+    return this.http.post(`${this.serverUrl}/auth/login`, user);
   }
 
   logout() {
@@ -26,8 +25,14 @@ export class AuthServiceService {
     }
   }
 
-  getUserInfo() {
-    let info = JSON.parse(localStorage.getItem('token'))
-    return info ? info.user : null;
+  getToken() {
+    let tokenData = JSON.parse(localStorage.getItem('token'))
+    if (tokenData) {
+      return tokenData.token;
+    }
+  }
+
+  getUserInfo(token) {
+    return this.http.post(`${this.serverUrl}/auth/userinfo`, token);
   }
 }

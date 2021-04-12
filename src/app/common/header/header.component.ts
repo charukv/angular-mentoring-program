@@ -11,10 +11,19 @@ export class HeaderComponent implements OnInit {
   constructor(
     private _authServiceService: AuthServiceService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    console.log(this._authServiceService.getUserInfo());
+    this.getUserInfo(JSON.parse(localStorage.getItem('token')));
+  }
+
+  getUserInfo(token) {
+    if (token) {
+      this._authServiceService.getUserInfo(token)
+        .subscribe((response) => {
+          console.log(response);
+        })
+    }
   }
 
   logout() {
@@ -26,3 +35,4 @@ export class HeaderComponent implements OnInit {
     return this._authServiceService.isAuthenticated();
   }
 }
+

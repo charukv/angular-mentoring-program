@@ -16,9 +16,9 @@ export class OrderByPipe implements PipeTransform {
     }
     return items.sort((item1: Course, item2: Course) => {
       if (direction === SortDirection.Asc) {
-        return item1.CreationDate.getTime() - item2.CreationDate.getTime()
+        return item1.date.getTime() - item2.date.getTime()
       } else {
-        return item2.CreationDate.getTime() - item1.CreationDate.getTime();
+        return item2.date.getTime() - item1.date.getTime();
       }
     });
   }

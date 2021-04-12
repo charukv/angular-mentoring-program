@@ -1,19 +1,19 @@
 <div class="auth">
-    <div class="auth-container">
-        <h2>Login</h2>
-        <form class="auth-form">
-            <mat-form-field class="auth-input">
-                <mat-label>E-mail:</mat-label>
-                <input matInput placeholder="Enter e-mail">
-            </mat-form-field>
-            <mat-form-field class="auth-input">
-                <mat-label>Password:</mat-label>
-                <input matInput placeholder="Enter password">
-            </mat-form-field>
-            <div class="auth-submit">
-                <a href="">forgot password?</a>
-                <button mat-raised-button class="auth-button" [disabled]="false" (click)="onSubmit()">Login</button>
-            </div>
-        </form>
-    </div>
+  <div class="auth-container">
+    <h2>Login</h2>
+    <form class="auth-form">
+      <mat-form-field class="auth-input">
+        <mat-label>Login:</mat-label>
+        <input matInput [(ngModel)]="login" name="login" placeholder="Enter login">
+      </mat-form-field>
+      <mat-form-field class="auth-input">
+        <mat-label>Password:</mat-label>
+        <input matInput [(ngModel)]="password" name="password" placeholder="Enter password">
+      </mat-form-field>
+      <div class="auth-submit">
+        <a href="">forgot password?</a>
+        <button mat-raised-button class="auth-button" [disabled]="false" (click)="onSubmit()">Login</button>
+      </div>
+    </form>
+  </div>
 </div>

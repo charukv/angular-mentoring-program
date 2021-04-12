@@ -1,13 +1,14 @@
 <app-breadcrumbs></app-breadcrumbs>
 
 <div class="component-container courses-container">
-    <div>
-        <input matInput class="courses-input" [(ngModel)]="searchValue" placeholder="Type to search">
-        <button mat-raised-button class="courses-buttton" (click)="search()">Search</button>
-    </div>
-    <div class="courses-add">
-        <button mat-raised-button class="courses-buttton courses-add-button" [routerLink]="'new'"><span class="material-icons">add</span>Add
+  <div>
+    <input matInput class="courses-input" [(ngModel)]="searchValue" placeholder="Type to search">
+    <button mat-raised-button class="courses-buttton" (click)="search()">Search</button>
+  </div>
+  <div class="courses-add">
+    <button mat-raised-button class="courses-buttton courses-add-button" [routerLink]="'new'"><span
+        class="material-icons">add</span>Add
       course</button>
-    </div>
-    <app-courses-list [searchValue]="searchValueSubmitted"></app-courses-list>
+  </div>
+  <app-courses-list [FilterText]="filterText" [searchValue]="searchValueSubmitted"></app-courses-list>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges } from "@angular/core";
-import { RouterLink } from "@angular/router";
+import { CoursesServiceService } from "src/app/services/courses-service/courses-service.service";
 
 @Component({
   selector: "app-courses-page",
@@ -7,19 +7,19 @@ import { RouterLink } from "@angular/router";
   styleUrls: ["./courses-page.component.scss"],
 })
 export class CoursesPageComponent implements OnInit {
-  searchValue: string;
+  searchValue: string = '';
   searchValueSubmitted: string;
+  filterText: string = '';
 
-  constructor() {}
+  constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   search() {
-    this.searchValueSubmitted = this.searchValue;
-    console.log(this.searchValue);
+    this.filterText = this.searchValue;
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -8,12 +8,11 @@ import { HttpClient } from "@angular/common/http";
 export class CoursesServiceService {
   coursesList = [
     {
-      Id: 1,
-      Title: "Video Course 1.",
-      Name: "Name tag",
-      CreationDate: new Date(),
-      Duration: 28,
-      Description: `Lorem ipsum dolor sit amet, 
+      id: 1,
+      name: "name tag",
+      date: new Date(),
+      length: 28,
+      description: `Lorem ipsum dolor sit amet, 
       consectetur adipiscing elit, sed do eiusmod tempor 
       incididunt ut labore et dolore magna aliqua. Ut enim 
       ad minim veniam, quis nostrud exercitation ullamco laboris 
@@ -21,15 +20,14 @@ export class CoursesServiceService {
       in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
       nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
       sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-      topRated: true,
+      isTopRated: true,
     },
     {
-      Id: 2,
-      Title: "Video Course 2.",
-      Name: "Name tag",
-      CreationDate: new Date("10/10/2030"),
-      Duration: 97,
-      Description: `Lorem ipsum dolor sit amet, 
+      id: 2,
+      name: "name tag",
+      date: new Date("10/10/2030"),
+      length: 97,
+      description: `Lorem ipsum dolor sit amet, 
       consectetur adipiscing elit, sed do eiusmod tempor 
       incididunt ut labore et dolore magna aliqua. Ut enim 
       ad minim veniam, quis nostrud exercitation ullamco laboris 
@@ -37,15 +35,14 @@ export class CoursesServiceService {
       in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
       nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
       sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-      topRated: false,
+      isTopRated: false,
     },
     {
-      Id: 3,
-      Title: "Video Course 3.",
-      Name: "Name tag",
-      CreationDate: new Date("02/28/2021"),
-      Duration: 135,
-      Description: `Lorem ipsum dolor sit amet, 
+      id: 3,
+      name: "name tag",
+      date: new Date("02/28/2021"),
+      length: 135,
+      description: `Lorem ipsum dolor sit amet, 
       consectetur adipiscing elit, sed do eiusmod tempor 
       incididunt ut labore et dolore magna aliqua. Ut enim 
       ad minim veniam, quis nostrud exercitation ullamco laboris 
@@ -53,30 +50,31 @@ export class CoursesServiceService {
       in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
       nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
       sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-      topRated: true,
+      isTopRated: true,
     },
   ]
+  serverUrl = 'http://localhost:3004';
 
   constructor(private http: HttpClient) { }
 
-  getCourses(): Observable<any> {
-    return of(this.coursesList);
+  getCourses(start, count, textFragment): Observable<any> {
+    let params = { start, count, textFragment }
+    return this.http.get(`${this.serverUrl}/courses`, { params });
   }
 
-  getCourseById(Id) {
-    return of(this.coursesList.find(course => course.Id == Id))
-
+  getCourseById(id) {
+    return this.http.get(`${this.serverUrl}/courses/${id}`);
   }
 
   createCourse(course) {
-    return of(course);
+    return this.http.post(`${this.serverUrl}/courses`, course);
   }
 
   updateCourse(course) {
     return of(course);
   }
 
-  removeCourse(course) {
-    // return this.http.delete('courses/delete', course);
+  removeCourse(id) {
+    return this.http.delete(`${this.serverUrl}/courses/${id}`);
   }
 }

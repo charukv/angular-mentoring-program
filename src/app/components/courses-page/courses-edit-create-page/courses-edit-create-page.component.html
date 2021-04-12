@@ -1,31 +1,31 @@
-<app-breadcrumbs [courseName]="_course.Title"></app-breadcrumbs>
+<app-breadcrumbs [courseName]="_course.name"></app-breadcrumbs>
 
 <div class="course">
   <div class="course-container">
-    <h2>{{ _course.Id ? 'Create' : 'Update' }} Course</h2>
+    <h2>{{ _course.id ? 'Create' : 'Update' }} Course</h2>
     <form class="course-form">
       <mat-form-field class="course-input" appearance="outline">
         <mat-label>Title:</mat-label>
-        <input matInput name="title" [(ngModel)]="_course.Title" placeholder="Enter title">
+        <input matInput name="title" [(ngModel)]="_course.name" placeholder="Enter title">
       </mat-form-field>
       <mat-form-field class="course-input" appearance="outline">
         <mat-label>Description:</mat-label>
-        <textarea matInput name="description" [(ngModel)]="_course.Description" cdkTextareaAutosize
+        <textarea matInput name="description" [(ngModel)]="_course.description" cdkTextareaAutosize
           #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="20"
           placeholder="Enter description"></textarea>
       </mat-form-field>
       <div class="course-duration">
         <mat-form-field class="course-input-duration" appearance="outline">
           <mat-label>Duration:</mat-label>
-          <input matInput type="number" name="duration" [(ngModel)]="_course.Duration" placeholder="Enter duration">
+          <input matInput type="number" name="duration" [(ngModel)]="_course.length" placeholder="Enter duration">
         </mat-form-field>
         <div class="course-duration-time">
-          {{ _course.Duration ? (_course.Duration | duration) :  null }}
+          {{ _course.length ? (_course.length | duration) :  null }}
         </div>
       </div>
       <mat-form-field class="course-input-date" appearance="outline">
         <mat-label>Date:</mat-label>
-        <input matInput name="date" [(ngModel)]="_course.CreationDate" placeholder="Enter date">
+        <input matInput name="date" [(ngModel)]="_course.date" placeholder="Enter date">
       </mat-form-field>
       <mat-form-field class="course-input-author" appearance="outline">
         <mat-label>Author:</mat-label>

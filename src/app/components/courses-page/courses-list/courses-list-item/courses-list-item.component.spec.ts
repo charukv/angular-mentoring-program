@@ -8,13 +8,12 @@ describe("CoursesListItemComponent", () => {
   let component: CoursesListItemComponent;
   let fixture: ComponentFixture<CoursesListItemComponent>;
   const courseItem = {
-    Id: 1,
-    Title: "Video Course 1.",
-    Name: "Name tag",
-    CreationDate: new Date(),
-    Duration: 28,
-    Description: `Lorem ipsum`,
-    topRated: true,
+    id: 1,
+    name: "Name tag",
+    date: new Date(),
+    length: 28,
+    description: `Lorem ipsum`,
+    isTopRated: true,
     Author: 'charukv'
   };
 

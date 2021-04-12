@@ -1,21 +1,19 @@
 export interface CourseInterface {
-    Id: number;
-    Title: string;
-    CreationDate: Date;
-    Duration: number;
-    Description: string;
-    topRated: boolean;
-    Name: string;
+    id: number;
+    date: Date;
+    length: number;
+    description: string;
+    isTopRated: boolean;
+    name: string;
     Author: string;
 }
 
 export class Course implements CourseInterface {
-    Id: number;
-    Title: string;
-    CreationDate: Date;
-    Duration: number;
-    Description: string;
-    topRated: boolean;
-    Name: string;
+    id: number;
+    date: Date;
+    length: number;
+    description: string;
+    isTopRated: boolean;
+    name: string;
     Author: string;
 }

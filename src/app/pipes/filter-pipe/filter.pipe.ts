@@ -10,11 +10,10 @@ export class FilterPipe implements PipeTransform {
     }
     return items.filter(
       (item) =>
-        item.Title.toLowerCase().includes(filterValue.toLowerCase()) ||
-        item.Description.toLowerCase().includes(filterValue.toLowerCase()) ||
-        item.Name.toLowerCase().includes(filterValue.toLowerCase()) ||
-        item.CreationDate.toString().toLowerCase().includes(filterValue.toLowerCase()) ||
-        item.Duration.toString().toLowerCase().includes(filterValue.toLowerCase())
+        item.description.toLowerCase().includes(filterValue.toLowerCase()) ||
+        item.name.toLowerCase().includes(filterValue.toLowerCase()) ||
+        item.date.toString().toLowerCase().includes(filterValue.toLowerCase()) ||
+        item.length.toString().toLowerCase().includes(filterValue.toLowerCase())
     );
   }
 }
