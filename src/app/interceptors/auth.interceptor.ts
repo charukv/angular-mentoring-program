@@ -11,7 +11,7 @@ import { AuthServiceService } from '../services/auth-service/auth-service.servic
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private _authServiceService: AuthServiceService) {}
+  constructor(private _authServiceService: AuthServiceService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this._authServiceService.getToken()}`
       }
     });
-    
+
     return next.handle(request);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { User } from "src/app/interfaces/user-interface/user-interface";
 import { AuthServiceService } from "../../services/auth-service/auth-service.service";
 
 @Component({
@@ -25,7 +26,17 @@ export class AuthPageComponent implements OnInit {
       .subscribe((response) => {
         localStorage.setItem("token", JSON.stringify(response));
         console.log('logged in successfully');
-        this.router.navigate(['/courses'])
+        this.getUserInfo(JSON.parse(localStorage.getItem('token')));
       });
+  }
+
+  getUserInfo(token) {
+    if (token) {
+      this._authServiceService.getUserInfo(token)
+        .subscribe((response: User) => {
+          console.log(response);
+          this.router.navigate(['/courses']);
+        })
+    }
   }
 }

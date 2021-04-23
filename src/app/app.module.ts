@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
 import { TextFieldModule } from '@angular/cdk/text-field';
 
+import { OverlayModule } from '@angular/cdk/overlay'
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AuthPageComponent } from "./components/auth-page/auth-page.component";
@@ -48,7 +49,8 @@ import { AuthInterceptor } from "./interceptors/auth.interceptor";
     FormsModule,
     HttpClientModule,
     CommonModule,
-    TextFieldModule
+    TextFieldModule,
+    OverlayModule
   ],
   providers: [OrderByPipe, FilterPipe, {
     provide: HTTP_INTERCEPTORS,

@@ -1,5 +1,6 @@
 import { Component, OnInit, SimpleChanges } from "@angular/core";
-import { CoursesServiceService } from "src/app/services/courses-service/courses-service.service";
+import { Subject } from "rxjs";
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: "app-courses-page",
@@ -10,8 +11,15 @@ export class CoursesPageComponent implements OnInit {
   searchValue: string = '';
   searchValueSubmitted: string;
   filterText: string = '';
+  searchSubject = new Subject<string>();
 
-  constructor() { }
+  constructor() {
+    this.searchSubject
+      .pipe(debounceTime(700))
+      .subscribe((searchValue: string) => {
+        this.filterText = searchValue;
+      })
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
@@ -20,6 +28,8 @@ export class CoursesPageComponent implements OnInit {
   ngOnInit(): void { }
 
   search() {
-    this.filterText = this.searchValue;
+    let searchValueLength = this.searchValue.replace(/\s/g, '').length;
+    if (searchValueLength >= 3 || searchValueLength === 0)
+      this.searchSubject.next(this.searchValue);
   }
 }

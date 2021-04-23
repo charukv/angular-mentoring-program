@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { CoursesServiceService } from 'src/app/services/courses-service/courses-service.service';
+import { SpinnerServiceService } from 'src/app/services/spinner-service/spinner-service.service';
 import { Course } from "../../../interfaces/course-interface/course-interface";
 
 @Component({
@@ -17,7 +19,8 @@ export class CoursesEditCreatePageComponent implements OnInit {
   constructor(
     private _coursesService: CoursesServiceService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _spinnerServiceService: SpinnerServiceService
   ) { }
 
   ngOnInit(): void {
@@ -33,15 +36,17 @@ export class CoursesEditCreatePageComponent implements OnInit {
   }
 
   getCourseById(courseId) {
+    this._spinnerServiceService.show();
     this._coursesService.getCourseById(courseId)
+      .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response: Course) => {
         this._course = response;
       });
   }
 
-  cancel() { 
+  cancel() {
     this._router.navigate(['courses']);
-   }
+  }
 
   onSubmit(course) {
     if (course.id) {
@@ -52,14 +57,18 @@ export class CoursesEditCreatePageComponent implements OnInit {
   }
 
   createCourse(course) {
+    this._spinnerServiceService.show();
     this._coursesService.createCourse(course)
+      .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response: Course) => {
         this._router.navigate(['courses'])
       });
   }
 
   updateCourse(course) {
+    this._spinnerServiceService.show();
     this._coursesService.updateCourse(course)
+      .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response: Course) => {
         this._router.navigate(['courses'])
       });

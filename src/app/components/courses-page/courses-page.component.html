@@ -2,8 +2,7 @@
 
 <div class="component-container courses-container">
   <div>
-    <input matInput class="courses-input" [(ngModel)]="searchValue" placeholder="Type to search">
-    <button mat-raised-button class="courses-buttton" (click)="search()">Search</button>
+    <input matInput class="courses-input" (keyup)="search()" [(ngModel)]="searchValue" placeholder="Type to search">
   </div>
   <div class="courses-add">
     <button mat-raised-button class="courses-buttton courses-add-button" [routerLink]="'new'"><span

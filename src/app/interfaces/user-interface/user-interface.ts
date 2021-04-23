@@ -4,11 +4,18 @@ export interface UserInterface {
     LastName: string;
 }
 
+interface Name {
+    first: string;
+    last: string;
+}
+
 export class User implements UserInterface {
     Id: number;
+    name: Name;
+    fullName: string;
     FirstName: string;
     LastName: string;
-    get FullName(): string {
-        return this.FirstName + '' + this.LastName;
+    public get FullName(): string {
+        return this.name.first + '' + this.name.last;
     }
 }
