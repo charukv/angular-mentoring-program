@@ -1,6 +1,6 @@
-<div class="courses-list" *ngIf="this.coursesList.length">
+<div class="courses-list" *ngIf="coursesLength">
   <!-- <div class="courses-list-item" *ngFor="let coursesItem of coursesList | orderBy:sortDirection"> -->
-  <div class="courses-list-item" *ngFor="let coursesItem of coursesList">
+  <div class="courses-list-item" *ngFor="let coursesItem of courses$ | async">
     <app-courses-list-item [CoursesItem]="coursesItem" (deleteCourse)="deleteCourseTrigger($event)">
     </app-courses-list-item>
   </div>
@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="courses-list" *ngIf="!this.coursesList.length">
+<div class="courses-list" *ngIf="!coursesLength">
   <div class="courses-no-data">
     <div>NO DATA, FEEL FREE TO ADD NEW COURSE</div>
   </div>

@@ -71,7 +71,7 @@ export class CoursesServiceService {
   }
 
   updateCourse(course) {
-    return of(course);
+    return this.http.patch(`${this.serverUrl}/courses/${course.id}`, course);
   }
 
   removeCourse(id) {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { map } from "rxjs/operators";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { setUser } from "src/app/actions/user.actions";
 import { User } from "src/app/interfaces/user-interface/user-interface";
 import { AuthServiceService } from "../../services/auth-service/auth-service.service";
 
@@ -12,38 +14,41 @@ import { AuthServiceService } from "../../services/auth-service/auth-service.ser
 export class HeaderComponent implements OnInit {
 
   userInfo: User;
+
+  fullName: string = null;
   isAuth: boolean;
+  token$: Observable<string>;
+  user$: Observable<User>;
 
   constructor(
     private _authServiceService: AuthServiceService,
-    private router: Router
+    private router: Router,
+    private store: Store<{ token: string, user: User }>
   ) {
-    this._authServiceService.userInfo$
-      .subscribe((userInfo) => {
-        if (userInfo) {
-          userInfo.fullName = `${userInfo.name.first} ${userInfo.name.last}`;
-          this.userInfo = userInfo;
-        } else {
-          this.userInfo = null;
-        }
-      });
-    this._authServiceService.authData$
-      .subscribe((authInfo) => {
-        this.isAuth = authInfo;
-      });
+    this.user$ = store.select('user')
+    this.token$ = store.select('token');
+    this.token$.subscribe(token => {
+      this.isAuth = !!token;
+    });
+    this.user$.subscribe(user => {
+      if (user) {
+        this.fullName = `${user.name.first} ${user.name.last}`;
+        this.userInfo = user;
+      } else {
+        this.userInfo = null;
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.getUserInfo(JSON.parse(localStorage.getItem('token')));
+    this.getUserInfo();
   }
 
-  getUserInfo(token) {
-    if (token) {
-      this._authServiceService.getUserInfo(token)
-        .subscribe((response: User) => {
-          console.log(response);
-        })
-    }
+  getUserInfo() {
+    this._authServiceService.getUserInfo()
+      .subscribe((userData: User) => {
+        this.store.dispatch(setUser({ user: userData }));
+      })
   }
 
   logout() {

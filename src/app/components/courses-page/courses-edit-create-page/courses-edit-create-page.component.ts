@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { add, edit } from 'src/app/actions/courses.actions';
 import { CoursesServiceService } from 'src/app/services/courses-service/courses-service.service';
 import { SpinnerServiceService } from 'src/app/services/spinner-service/spinner-service.service';
 import { Course } from "../../../interfaces/course-interface/course-interface";
@@ -20,7 +22,8 @@ export class CoursesEditCreatePageComponent implements OnInit {
     private _coursesService: CoursesServiceService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    private _spinnerServiceService: SpinnerServiceService
+    private _spinnerServiceService: SpinnerServiceService,
+    private store: Store<{ courses: Course[] }>
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +64,7 @@ export class CoursesEditCreatePageComponent implements OnInit {
     this._coursesService.createCourse(course)
       .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response: Course) => {
+        this.store.dispatch(add({ course: response }))
         this._router.navigate(['courses'])
       });
   }
@@ -70,6 +74,7 @@ export class CoursesEditCreatePageComponent implements OnInit {
     this._coursesService.updateCourse(course)
       .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response: Course) => {
+        this.store.dispatch(edit({ course: response }))
         this._router.navigate(['courses'])
       });
   }

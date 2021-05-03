@@ -24,6 +24,10 @@ import { OrderByPipe } from './pipes/order-by-pipe/order-by.pipe';
 import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
+import { StoreModule } from '@ngrx/store';
+import { coursesReducer } from './reducers/courses.reducer';
+import { authReducer } from "./reducers/auth.reducer";
+import { userReducer } from "./reducers/user.reducer";
 
 @NgModule({
   declarations: [
@@ -50,7 +54,8 @@ import { AuthInterceptor } from "./interceptors/auth.interceptor";
     HttpClientModule,
     CommonModule,
     TextFieldModule,
-    OverlayModule
+    OverlayModule,
+    StoreModule.forRoot({ courses: coursesReducer, token: authReducer, user: userReducer })
   ],
   providers: [OrderByPipe, FilterPipe, {
     provide: HTTP_INTERCEPTORS,

@@ -19,8 +19,7 @@ export class CoursesListItemComponent implements OnInit {
   popupVisibility: boolean = false;
 
   @Input() set CoursesItem(item) {
-    item.date = new Date(item.date);
-    let creationDateTime = item.date.getTime();
+    let creationDateTime = new Date(item.date).getTime();
     this.coursesItem = item;
     if (creationDateTime < this.currentDate && creationDateTime >= this.currentDate - this.fourteenDays) {
       this.borderColor = 'green';

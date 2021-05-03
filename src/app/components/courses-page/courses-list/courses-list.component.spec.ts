@@ -38,8 +38,4 @@ describe('CoursesListComponent', () => {
 
     expect(consoleSpy).toHaveBeenCalled();
   });
-
-  it('should contain data in coursesList variable', () => {
-    expect(component.coursesList.length).toBeGreaterThan(0);
-  });
 });

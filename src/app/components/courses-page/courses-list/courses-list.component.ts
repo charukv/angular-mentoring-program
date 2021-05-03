@@ -4,6 +4,9 @@ import { CoursesServiceService } from "../../../services/courses-service/courses
 import { Course } from "../../../interfaces/course-interface/course-interface";
 import { finalize } from "rxjs/operators";
 import { SpinnerServiceService } from "../../../services/spinner-service/spinner-service.service";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { load, remove, set } from "src/app/actions/courses.actions";
 
 @Component({
   selector: "app-courses-list",
@@ -11,11 +14,12 @@ import { SpinnerServiceService } from "../../../services/spinner-service/spinner
   styleUrls: ["./courses-list.component.scss"],
 })
 export class CoursesListComponent implements OnInit {
-  coursesList: Course[] = [];
   sortDirection = SortDirection.Desc;
   coursesStart = 0;
   coursesCount = 3;
   filterText: string;
+  coursesLength: number;
+  courses$: Observable<Course[]>;
 
   @Input() searchValue: string;
   @Input() set FilterText(text) {
@@ -25,7 +29,13 @@ export class CoursesListComponent implements OnInit {
   };
 
   constructor(private _coursesService: CoursesServiceService,
-    private _spinnerServiceService: SpinnerServiceService) { }
+    private _spinnerServiceService: SpinnerServiceService,
+    private store: Store<{ courses: Course[] }>) {
+    this.courses$ = store.select('courses');
+    this.courses$.subscribe(courses => {
+      this.coursesLength = courses.length
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
@@ -38,7 +48,7 @@ export class CoursesListComponent implements OnInit {
     this._coursesService.getCourses(start, count, filterText)
       .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response) => {
-        this.coursesList = this.coursesList.concat(response);
+        this.store.dispatch(load({ courses: response }));
       });
   }
 
@@ -47,12 +57,12 @@ export class CoursesListComponent implements OnInit {
     this._coursesService.getCourses(start, count, filterText)
       .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response) => {
-        this.coursesList = response;
+        this.store.dispatch(set({ courses: response }));
       });
   }
 
   loadMore() {
-    this.coursesStart = this.coursesList.length + 3;
+    this.coursesStart = this.coursesLength
     this.getCourses(this.coursesStart, this.coursesCount, this.filterText);
   }
 
@@ -61,10 +71,9 @@ export class CoursesListComponent implements OnInit {
     this._coursesService.removeCourse(id)
       .pipe(finalize(() => {
         this._spinnerServiceService.hide();
-        this.getNewCoursesList(this.coursesStart, this.coursesCount, this.filterText);
       }))
       .subscribe((response) => {
-        this.coursesStart = 0;
+        this.store.dispatch(remove({ courseId: id }));
       });
   }
 }

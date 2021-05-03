@@ -7,7 +7,7 @@
       <div class="header-item header-title"> video course</div>
     </div>
     <div *ngIf="isAuth" class="header-items">
-      <a class="header-item header-user-info"><span class="material-icons margin-right">person</span> {{userInfo?.fullName}}</a>
+      <a class="header-item header-user-info"><span class="material-icons margin-right">person</span> {{fullName}}</a>
       <a class="header-item header-user-info" (click)="logout()"><span class="material-icons margin-right">logout</span>
         Log off</a>
     </div>

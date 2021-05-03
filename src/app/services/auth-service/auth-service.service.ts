@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, of } from "rxjs";
-import { map, switchMap } from "rxjs/operators";
-import { User } from "src/app/interfaces/user-interface/user-interface";
+import { Store } from "@ngrx/store";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { remove } from "src/app/actions/auth.actions";
 
 @Injectable({
   providedIn: "root",
@@ -13,35 +13,40 @@ export class AuthServiceService {
   userInfo$ = this.userData.asObservable();
   authData$ = new BehaviorSubject<any>(false);
 
-  constructor(private http: HttpClient) { }
+  token$: Observable<string>;
+  isAuth: boolean;
+  token: string;
+
+  constructor(private http: HttpClient,
+    private store: Store<{ token: string }>) {
+    this.token$ = store.select('token');
+    this.token$.subscribe(token => {
+      this.isAuth = !!token;
+      this.token = token;
+    })
+  }
 
   login(user) {
     return this.http.post(`${this.serverUrl}/auth/login`, user)
   }
 
   logout() {
-    localStorage.removeItem("token");
-    this.userData.next(null);
+    this.store.dispatch(remove());
   }
 
   isAuthenticated() {
-    const isAuth = !!localStorage.getItem('token')
-    this.authData$.next(isAuth);
-    return of(isAuth);
+    return of(this.isAuth);
   }
 
   getToken() {
-    let tokenData = JSON.parse(localStorage.getItem('token'))
-    if (tokenData) {
-      return tokenData.token;
-    }
+    return this.token;
   }
 
-  getUserInfo(token) {
-    return this.http.post(`${this.serverUrl}/auth/userinfo`, token)
-      .pipe(switchMap((userData: User) => {
-        this.userData.next(userData);
-        return this.userInfo$;
-      }));
+  getUserInfo() {
+    if (this.token) {
+      return this.http.post(`${this.serverUrl}/auth/userinfo`, { token: this.token });
+    } else {
+      return of(null);
+    }
   }
 }

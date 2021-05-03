@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { set } from "src/app/actions/auth.actions";
+import { setUser } from "src/app/actions/user.actions";
 import { User } from "src/app/interfaces/user-interface/user-interface";
 import { AuthServiceService } from "../../services/auth-service/auth-service.service";
 
@@ -15,7 +18,8 @@ export class AuthPageComponent implements OnInit {
 
   constructor(
     private _authServiceService: AuthServiceService,
-    private router: Router
+    private router: Router,
+    private store: Store<{ token: string, user: User }>
   ) { }
 
   ngOnInit(): void {
@@ -23,20 +27,17 @@ export class AuthPageComponent implements OnInit {
 
   onSubmit() {
     this._authServiceService.login({ login: this.login, password: this.password })
-      .subscribe((response) => {
-        localStorage.setItem("token", JSON.stringify(response));
-        console.log('logged in successfully');
-        this.getUserInfo(JSON.parse(localStorage.getItem('token')));
+      .subscribe((response: any) => {
+        this.store.dispatch(set({ token: response.token }))
+        this.getUserInfo();
       });
   }
 
-  getUserInfo(token) {
-    if (token) {
-      this._authServiceService.getUserInfo(token)
-        .subscribe((response: User) => {
-          console.log(response);
-          this.router.navigate(['/courses']);
-        })
-    }
+  getUserInfo() {
+    this._authServiceService.getUserInfo()
+      .subscribe((response: User) => {
+        this.store.dispatch(setUser({ user: response }));
+        this.router.navigate(['/courses']);
+      })
   }
 }
