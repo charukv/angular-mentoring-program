@@ -7,6 +7,9 @@ import { add, edit } from 'src/app/actions/courses.actions';
 import { CoursesServiceService } from 'src/app/services/courses-service/courses-service.service';
 import { SpinnerServiceService } from 'src/app/services/spinner-service/spinner-service.service';
 import { Course } from "../../../interfaces/course-interface/course-interface";
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Author } from 'src/app/interfaces/author-interface/author-interface';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-courses-edit-create-page',
@@ -17,12 +20,28 @@ export class CoursesEditCreatePageComponent implements OnInit {
 
   _course: Course = new Course();
   routeSub: Subscription;
+  lengthControl: AbstractControl;
+  nameControl: AbstractControl;
+  descriptionControl: AbstractControl;
+  allAuthors: Author[] = [];
+  selectedAuthors: Author[] = [];
+  courseId: number;
+  pipe = new DatePipe('en-US');
+
+  courseForm = this.fb.group({
+    name: ['', [Validators.required, Validators.maxLength(50)]],
+    description: ['', [Validators.required, Validators.maxLength(500)]],
+    date: ['', Validators.required],
+    length: ['', Validators.required],
+    author: ['']
+  });
 
   constructor(
     private _coursesService: CoursesServiceService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _spinnerServiceService: SpinnerServiceService,
+    private fb: FormBuilder,
     private store: Store<{ courses: Course[] }>
   ) { }
 
@@ -32,6 +51,10 @@ export class CoursesEditCreatePageComponent implements OnInit {
         this.getCourseById(params['id']);
       }
     });
+    this.getAllAuthors();
+    this.lengthControl = this.courseForm.get('length');
+    this.nameControl = this.courseForm.get('name');
+    this.descriptionControl = this.courseForm.get('description');
   }
 
   ngOnDestroy() {
@@ -43,7 +66,14 @@ export class CoursesEditCreatePageComponent implements OnInit {
     this._coursesService.getCourseById(courseId)
       .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response: Course) => {
-        this._course = response;
+        this.courseId = response.id;
+        this.selectedAuthors = response.authors;
+        this.courseForm.patchValue({
+          name: response.name,
+          description: response.description,
+          date: this.pipe.transform(new Date(response.date), 'dd/MM/yyyy'),
+          length: response.length,
+        })
       });
   }
 
@@ -52,7 +82,10 @@ export class CoursesEditCreatePageComponent implements OnInit {
   }
 
   onSubmit(course) {
-    if (course.id) {
+    let dateParts = course.date.split("/");
+    let validDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+    course.date = validDate;
+    if (this.courseId) {
       this.updateCourse(course);
     } else {
       this.createCourse(course);
@@ -60,6 +93,10 @@ export class CoursesEditCreatePageComponent implements OnInit {
   }
 
   createCourse(course) {
+    course = {
+      ...course,
+      authors: this.selectedAuthors
+    }
     this._spinnerServiceService.show();
     this._coursesService.createCourse(course)
       .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
@@ -70,12 +107,24 @@ export class CoursesEditCreatePageComponent implements OnInit {
   }
 
   updateCourse(course) {
+    course = {
+      ...course,
+      id: this.courseId,
+      authors: this.selectedAuthors
+    }
     this._spinnerServiceService.show();
     this._coursesService.updateCourse(course)
       .pipe(finalize(() => { this._spinnerServiceService.hide(); }))
       .subscribe((response: Course) => {
         this.store.dispatch(edit({ course: response }))
         this._router.navigate(['courses'])
+      });
+  }
+
+  getAllAuthors() {
+    this._coursesService.getAllAuthors()
+      .subscribe((response: Author[]) => {
+        this.allAuthors = response;
       });
   }
 }

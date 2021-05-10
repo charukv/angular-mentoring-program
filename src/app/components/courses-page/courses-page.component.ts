@@ -1,6 +1,7 @@
 import { Component, OnInit, SimpleChanges } from "@angular/core";
 import { Subject } from "rxjs";
 import { debounceTime } from 'rxjs/operators';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-courses-page",
@@ -8,12 +9,16 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ["./courses-page.component.scss"],
 })
 export class CoursesPageComponent implements OnInit {
-  searchValue: string = '';
+  searchControl: AbstractControl;
   searchValueSubmitted: string;
   filterText: string = '';
   searchSubject = new Subject<string>();
 
-  constructor() {
+  searchForm = this.fb.group({
+    searchValue: ['']
+  });
+
+  constructor(private fb: FormBuilder) {
     this.searchSubject
       .pipe(debounceTime(700))
       .subscribe((searchValue: string) => {
@@ -25,11 +30,13 @@ export class CoursesPageComponent implements OnInit {
     console.log(changes);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.searchControl = this.searchForm.get('searchValue');
+  }
 
   search() {
-    let searchValueLength = this.searchValue.replace(/\s/g, '').length;
+    let searchValueLength =  this.searchControl.value.replace(/\s/g, '').length;
     if (searchValueLength >= 3 || searchValueLength === 0)
-      this.searchSubject.next(this.searchValue);
+      this.searchSubject.next(this.searchControl.value);
   }
 }

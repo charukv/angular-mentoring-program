@@ -1,18 +1,24 @@
 <div class="auth">
   <div class="auth-container">
     <h2>Login</h2>
-    <form class="auth-form">
+    <form class="auth-form" [formGroup]="authForm">
       <mat-form-field class="auth-input">
         <mat-label>Login:</mat-label>
-        <input matInput [(ngModel)]="login" name="login" placeholder="Enter login">
+        <input matInput required formControlName="login" placeholder="Enter login">
+        <mat-error *ngIf="loginControl.hasError('required')">
+          Login is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="auth-input">
         <mat-label>Password:</mat-label>
-        <input matInput [(ngModel)]="password" name="password" placeholder="Enter password">
+        <input matInput required type="password" formControlName="password" placeholder="Enter password">
+        <mat-error *ngIf="passwordControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
       <div class="auth-submit">
         <a href="">forgot password?</a>
-        <button mat-raised-button class="auth-button" [disabled]="false" (click)="onSubmit()">Login</button>
+        <button mat-raised-button class="auth-button" [disabled]="!authForm.valid" (click)="onSubmit()">Login</button>
       </div>
     </form>
   </div>

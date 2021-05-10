@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
 import { TextFieldModule } from '@angular/cdk/text-field';
 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 import { OverlayModule } from '@angular/cdk/overlay'
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -28,6 +31,11 @@ import { StoreModule } from '@ngrx/store';
 import { coursesReducer } from './reducers/courses.reducer';
 import { authReducer } from "./reducers/auth.reducer";
 import { userReducer } from "./reducers/user.reducer";
+import { ReactiveFormsModule } from '@angular/forms';
+import { DateInputComponent } from './custom-inputs/date-input/date-input.component';
+import { DurationInputComponent } from './custom-inputs/duration-input/duration-input.component';
+import { AuthorsInputComponent } from './custom-inputs/authors-input/authors-input.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -40,7 +48,10 @@ import { userReducer } from "./reducers/user.reducer";
     CoursePlateDirective,
     DurationPipe,
     OrderByPipe,
-    FilterPipe
+    FilterPipe,
+    DateInputComponent,
+    DurationInputComponent,
+    AuthorsInputComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +66,11 @@ import { userReducer } from "./reducers/user.reducer";
     CommonModule,
     TextFieldModule,
     OverlayModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule,
     StoreModule.forRoot({ courses: coursesReducer, token: authReducer, user: userReducer })
   ],
   providers: [OrderByPipe, FilterPipe, {

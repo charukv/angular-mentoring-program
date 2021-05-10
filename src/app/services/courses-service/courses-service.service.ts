@@ -77,4 +77,8 @@ export class CoursesServiceService {
   removeCourse(id) {
     return this.http.delete(`${this.serverUrl}/courses/${id}`);
   }
+
+  getAllAuthors() {
+    return this.http.get(`${this.serverUrl}/authors`);
+  }
 }

@@ -1,0 +1,21 @@
+<mat-form-field class="course-input-author" appearance="outline">
+  <mat-label>Authors:</mat-label>
+  <mat-chip-list #chipList aria-label="Authors selection">
+    <mat-chip *ngFor="let author of selectedAuthors" [selectable]="selectable" [removable]="removable"
+      (removed)="remove(author)">
+      {{author.name}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="New author..." #authorInput [matAutocomplete]="auto"
+      [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let author of allAuthors" [value]="author">
+      {{author.name}}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngIf="_control.control.hasError('required')">
+    Authors are <strong>required</strong>
+  </mat-error>
+</mat-form-field>

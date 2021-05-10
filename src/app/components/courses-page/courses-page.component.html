@@ -1,9 +1,12 @@
 <app-breadcrumbs></app-breadcrumbs>
 
 <div class="component-container courses-container">
-  <div>
-    <input matInput class="courses-input" (keyup)="search()" [(ngModel)]="searchValue" placeholder="Type to search">
-  </div>
+  <form [formGroup]="searchForm">
+    <div>
+      <input matInput class="courses-input" (keyup)="search()" formControlName="searchValue"
+        placeholder="Type to search">
+    </div>
+  </form>
   <div class="courses-add">
     <button mat-raised-button class="courses-buttton courses-add-button" [routerLink]="'new'"><span
         class="material-icons">add</span>Add

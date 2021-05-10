@@ -1,0 +1,11 @@
+<mat-form-field class="course-input-duration" appearance="outline">
+  <mat-label>Duration:</mat-label>
+  <input matInput required placeholder="Enter duration" [value]="value" (input)="changed($event.target.value)"
+    (blur)="touched()" [formControl]="_control.control">
+    <mat-error *ngIf="_control.control.hasError('required')">
+      Duration is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="_control.control.hasError('invalid')">
+      Invalid value, only numbers available
+    </mat-error>
+</mat-form-field>
