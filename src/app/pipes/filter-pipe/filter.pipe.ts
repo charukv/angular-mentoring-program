@@ -9,12 +9,17 @@ export class FilterPipe implements PipeTransform {
       return items;
     }
     return items.filter(
-      (item) =>
-        item.Title.toLowerCase().includes(filterValue.toLowerCase()) ||
-        item.Description.toLowerCase().includes(filterValue.toLowerCase()) ||
-        item.Name.toLowerCase().includes(filterValue.toLowerCase()) ||
-        item.CreationDate.toString().toLowerCase().includes(filterValue.toLowerCase()) ||
-        item.Duration.toString().toLowerCase().includes(filterValue.toLowerCase())
+      (item) => {
+        return Object.keys(item).some(key => {
+          return item[key].toString().toLowerCase().includes(filterValue.toLowerCase())
+        })
+
+        // item.Title.toLowerCase().includes(filterValue.toLowerCase()) ||
+        // item.Description.toLowerCase().includes(filterValue.toLowerCase()) ||
+        // item.Name.toLowerCase().includes(filterValue.toLowerCase()) ||
+        // item.CreationDate.toString().toLowerCase().includes(filterValue.toLowerCase()) ||
+        // item.Duration.toString().toLowerCase().includes(filterValue.toLowerCase())
+      }
     );
   }
 }
