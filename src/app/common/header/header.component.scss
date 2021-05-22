@@ -25,6 +25,12 @@
         font-weight: 700;
         text-transform: uppercase;
     }
+    &-languages {
+        margin-left: 20px;
+        &-item {
+            background-color: rgba(255, 255, 255, 0.699);
+        }
+    }
     &-logo {
         margin-right: 10px;
     }

@@ -5,11 +5,17 @@
           play_circle_outline
         </span></div>
       <div class="header-item header-title"> video course</div>
+      <mat-button-toggle-group class="header-languages">
+        <mat-button-toggle value="eng" class="header-languages-item" (click)="translate.use('en')">ENG
+        </mat-button-toggle>
+        <mat-button-toggle value="ukr" class="header-languages-item" (click)="translate.use('ua')">UKR
+        </mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
     <div *ngIf="isAuth" class="header-items">
       <a class="header-item header-user-info"><span class="material-icons margin-right">person</span> {{fullName}}</a>
       <a class="header-item header-user-info" (click)="logout()"><span class="material-icons margin-right">logout</span>
-        Log off</a>
+        {{ 'HEADER.LOGOFF' | translate }}</a>
     </div>
   </div>
 </header>

@@ -5,12 +5,12 @@
     </app-courses-list-item>
   </div>
   <div class="courses-load-more">
-    <div (click)="loadMore()">Load more</div>
+    <div (click)="loadMore()">{{ 'COURSES.LOAD_MORE' | translate }}</div>
   </div>
 </div>
 
 <div class="courses-list" *ngIf="!coursesLength">
   <div class="courses-no-data">
-    <div>NO DATA, FEEL FREE TO ADD NEW COURSE</div>
+    <div>{{ 'COURSES.NO_DATA' | translate }}</div>
   </div>
 </div>

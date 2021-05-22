@@ -1,0 +1,37 @@
+{
+    "LOGIN": {
+        "TITLE": "Login",
+        "BUTTON": "Login",
+        "FORGOT": "forgot password?",
+        "PASSWORD": "Password",
+        "LOGIN": "Login"
+    },
+    "HEADER": {
+        "LOGOFF": "Log off"
+    },
+    "COURSES": {
+        "ADD": "Add course",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "MIN": "min",
+        "HOURS": "h",
+        "SEARCH": "Type to search",
+        "LOAD_MORE": "Load more",
+        "ADD_COURSE": "Add",
+        "UPDATE_COURSE": "Update",
+        "TITLE": "Title",
+        "TITLE_P": "Enter Title",
+        "DESC": "Description",
+        "DESC_P": "Enter description",
+        "DURATION": "Duration",
+        "DURATION_P": "Enter duration",
+        "DATE": "Date",
+        "DATE_P": "Enter date",
+        "AUTHORS": "Authors",
+        "AUTHORS_P": "New author",
+        "NO_DATA": "NO DATA, FEEL FREE TO ADD NEW COURSE",
+        "SAVE": "Save",
+        "CANCEL": "Cancel",
+        "COURSES": "Courses"
+    }
+}

@@ -2,11 +2,11 @@
 
 <div class="course">
   <div class="course-container">
-    <h2>{{ _course.id ? 'Create' : 'Update' }} Course</h2>
+    <h2>{{addUpdateStr}} {{ 'COURSES.COURSES' | translate }}</h2>
     <form class="course-form" [formGroup]="courseForm">
       <mat-form-field class="course-input" appearance="outline">
-        <mat-label>Title:</mat-label>
-        <input matInput required formControlName="name" placeholder="Enter title">
+        <mat-label>{{ 'COURSES.TITLE' | translate }}:</mat-label>
+        <input matInput required formControlName="name" placeholder="{{ 'COURSES.TITLE_P' | translate }}">
         <mat-error *ngIf="nameControl.hasError('required')">
           Title is <strong>required</strong>
         </mat-error>
@@ -15,9 +15,9 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="course-input" appearance="outline">
-        <mat-label>Description:</mat-label>
+        <mat-label>{{ 'COURSES.DESC' | translate }}:</mat-label>
         <textarea matInput required formControlName="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-          cdkAutosizeMinRows="10" cdkAutosizeMaxRows="20" placeholder="Enter description"></textarea>
+          cdkAutosizeMinRows="10" cdkAutosizeMaxRows="20" placeholder="{{ 'COURSES.DESC_P' | translate }}"></textarea>
         <mat-error *ngIf="descriptionControl.hasError('required')">
           Description is <strong>required</strong>
         </mat-error>
@@ -36,9 +36,9 @@
         (selectedAuthorsChange)="selectedAuthors = $event">
       </authors-input>
       <div class="course-submit">
-        <button mat-raised-button class="course-button" (click)="cancel()">Cancel</button>
+        <button mat-raised-button class="course-button" (click)="cancel()">{{ 'COURSES.CANCEL' | translate }}</button>
         <button mat-raised-button class="course-button" [disabled]="!courseForm.valid"
-          (click)="onSubmit(courseForm.value)">Save</button>
+          (click)="onSubmit(courseForm.value)">{{ 'COURSES.SAVE' | translate }}</button>
       </div>
     </form>
   </div>

@@ -14,8 +14,8 @@ const routes: Routes = [
   { path: "courses/new", component: CoursesEditCreatePageComponent, canActivate: [AuthGuardGuard] },
   { path: "courses/:id", component: CoursesEditCreatePageComponent, canActivate: [AuthGuardGuard] },
   { path: "not-found", component: NotFoundComponent },
-  { path: "**", redirectTo: "not-found", pathMatch: "full" },
   { path: "", redirectTo: "courses", pathMatch: "full" },
+  { path: "**", redirectTo: "not-found", pathMatch: "full" }
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 <mat-form-field class="course-input-date" appearance="outline">
-  <mat-label>Date:</mat-label>
-  <input matInput required placeholder="Enter Date" [value]="value" (input)="changed($event.target.value)"
+  <mat-label>{{ 'COURSES.DATE' | translate }}:</mat-label>
+  <input matInput required placeholder="{{ 'COURSES.DATE_P' | translate }}" [value]="value" (input)="changed($event.target.value)"
     (blur)="touched()" [formControl]="_control.control">
     <mat-error *ngIf="_control.control.hasError('required')">
       Date is <strong>required</strong>

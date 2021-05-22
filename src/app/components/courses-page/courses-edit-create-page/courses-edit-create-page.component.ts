@@ -10,6 +10,8 @@ import { Course } from "../../../interfaces/course-interface/course-interface";
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Author } from 'src/app/interfaces/author-interface/author-interface';
 import { DatePipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { E } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-courses-edit-create-page',
@@ -27,6 +29,7 @@ export class CoursesEditCreatePageComponent implements OnInit {
   selectedAuthors: Author[] = [];
   courseId: number;
   pipe = new DatePipe('en-US');
+  addUpdateStr: string;
 
   courseForm = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(50)]],
@@ -42,13 +45,23 @@ export class CoursesEditCreatePageComponent implements OnInit {
     private _router: Router,
     private _spinnerServiceService: SpinnerServiceService,
     private fb: FormBuilder,
-    private store: Store<{ courses: Course[] }>
+    private store: Store<{ courses: Course[] }>,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
     this.routeSub = this._activatedRoute.params.subscribe(params => {
       if (params['id']) {
         this.getCourseById(params['id']);
+        this.translate.stream("COURSES.UPDATE_COURSE")
+          .subscribe((text) => {
+            this.addUpdateStr = text;
+          });
+      } else {
+        this.translate.stream("COURSES.ADD_COURSE")
+          .subscribe((text) => {
+            this.addUpdateStr = text;
+          });
       }
     });
     this.getAllAuthors();

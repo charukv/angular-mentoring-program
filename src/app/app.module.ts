@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { SharedModule } from "./common/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
 import { TextFieldModule } from '@angular/cdk/text-field';
 
@@ -36,6 +36,13 @@ import { DateInputComponent } from './custom-inputs/date-input/date-input.compon
 import { DurationInputComponent } from './custom-inputs/duration-input/duration-input.component';
 import { AuthorsInputComponent } from './custom-inputs/authors-input/authors-input.component';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslateLoader } from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -71,7 +78,15 @@ import { MatIconModule } from '@angular/material/icon';
     MatChipsModule,
     MatAutocompleteModule,
     MatIconModule,
-    StoreModule.forRoot({ courses: coursesReducer, token: authReducer, user: userReducer })
+    StoreModule.forRoot({ courses: coursesReducer, token: authReducer, user: userReducer }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'en'
+    })
   ],
   providers: [OrderByPipe, FilterPipe, {
     provide: HTTP_INTERCEPTORS,

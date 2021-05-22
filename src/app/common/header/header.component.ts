@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
+import { TranslateService } from "@ngx-translate/core";
 import { Observable } from "rxjs";
 import { setUser } from "src/app/actions/user.actions";
 import { User } from "src/app/interfaces/user-interface/user-interface";
@@ -19,11 +20,13 @@ export class HeaderComponent implements OnInit {
   isAuth: boolean;
   token$: Observable<string>;
   user$: Observable<User>;
+  languages: string[] = ['eng', 'ukr'];
 
   constructor(
     private _authServiceService: AuthServiceService,
     private router: Router,
-    private store: Store<{ token: string, user: User }>
+    private store: Store<{ token: string, user: User }>,
+    public translate: TranslateService
   ) {
     this.user$ = store.select('user')
     this.token$ = store.select('token');

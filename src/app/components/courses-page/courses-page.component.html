@@ -4,13 +4,12 @@
   <form [formGroup]="searchForm">
     <div>
       <input matInput class="courses-input" (keyup)="search()" formControlName="searchValue"
-        placeholder="Type to search">
+        placeholder="{{ 'COURSES.SEARCH' | translate }}">
     </div>
   </form>
   <div class="courses-add">
     <button mat-raised-button class="courses-buttton courses-add-button" [routerLink]="'new'"><span
-        class="material-icons">add</span>Add
-      course</button>
+        class="material-icons">add</span>{{ 'COURSES.ADD' | translate }}</button>
   </div>
   <app-courses-list [FilterText]="filterText" [searchValue]="searchValueSubmitted"></app-courses-list>
 </div>
